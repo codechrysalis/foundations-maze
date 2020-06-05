@@ -126,8 +126,18 @@ window.onload = () => {
 	}
 
 	const addMovement = () => {
-		const directions = commands.value.replace(/[^A-Z0-9]/ig, '').split('');
+		const directions = commands.value.split('');
 		directions.map(direction => movements.push(direction.toLowerCase() === 'f' ? "forward" : "rotate"));
+	}
+
+	const checkPosition = (index) => {
+		const cheat1 = "rrrfffffrffffffrfffffrrr";
+		const cheat2 = "rfffffrrrffffffrrrfffffr";
+		if (JSON.stringify(movingArrow.index) === JSON.stringify([550, 650]) && movingArrow.pointing === "down" && index === movements.length - 1) {
+			canvas.classList.add("winner");
+			executeCommands.setAttribute("disabled", "disabled");
+			pattern.innerText = commands.value !== cheat1 && commands.value !== cheat2 ? "Well done!" : "Well done... cheater :-)";
+		}
 	}
 
 	const executeAll = () => {
@@ -148,9 +158,10 @@ window.onload = () => {
 				ctx.save();
 				directions(movements[i]);
 				ctx.restore();
+				checkPosition(i);
 			}
 			i++;
-		}, 400);
+		}, 100);
 	}
 
 	function addCanvasCoords(begin, end) {
@@ -277,14 +288,16 @@ window.onload = () => {
 	}
 
 	function resetStatus() {
-		ctx.clearRect(0, 0, element.width, element.height);
-		movingArrow.x = element.width / 2 - 50;
-		movingArrow.y = 0;
-		movingArrow.pointing = "down";
-		movingArrow.spin = null;
-		ctx.drawImage(image, movingArrow.x, movingArrow.y, 100, 100);
-		draw();
-		pattern.innerText = "";
+		if (![...canvas.classList].includes("winner")) {
+			ctx.clearRect(0, 0, element.width, element.height);
+			movingArrow.x = element.width / 2 - 50;
+			movingArrow.y = 0;
+			movingArrow.pointing = "down";
+			movingArrow.spin = null;
+			ctx.drawImage(image, movingArrow.x, movingArrow.y, 100, 100);
+			draw();
+			pattern.innerText = "";
+		}
 	}
 
 	function playerReady() {
@@ -294,7 +307,7 @@ window.onload = () => {
 	}
 
 	function evaluateLetter(e) {
-		const acceptedKeys = ["f", "F", "r", "R", ",", " "];
+		const acceptedKeys = ["f", "F", "r", "R"];
 		if (!acceptedKeys.includes(e.key)) {
 			e.preventDefault();
 		}

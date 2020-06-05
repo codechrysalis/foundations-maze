@@ -7,6 +7,12 @@ body {
     background-color: lightgoldenrodyellow;
 }
 
+.winner { 
+    background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
+    background-size: 1800% 1800%;
+    animation: rainbow 10s ease infinite;
+}
+  
 h1 {
     margin: 20px 0px 50px 0px;
     color: #fafafa;
@@ -146,4 +152,10 @@ button {
         box-shadow: 2px 5px black;
         transform: translateY(0px);
     }
+}
+
+@keyframes rainbow { 
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
 }
