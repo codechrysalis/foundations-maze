@@ -1,12 +1,11 @@
 window.onload = () => {
-	const arrow = "./images/arrow.png";
+	const arrow = "./src/images/arrow.png";
 	const startButton = document.getElementsByClassName('start-button')[0];
 	const missionControlTitle = document.getElementsByClassName('missionControl-title')[0];
 	const missionControl = document.getElementsByClassName('missionControl')[0];
 	const executeCommands = document.getElementsByClassName('execute')[0];
 	const commands = document.getElementsByClassName("commands")[0];
 	const pattern = document.getElementsByClassName('pattern')[0];
-	const clear = document.getElementsByClassName('clear')[0];
 	const movements = [];
 
 	const playground = document.createElement('div');
