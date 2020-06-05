@@ -161,7 +161,7 @@ window.onload = () => {
 				checkPosition(i);
 			}
 			i++;
-		}, 100);
+		}, 300);
 	}
 
 	function addCanvasCoords(begin, end) {
