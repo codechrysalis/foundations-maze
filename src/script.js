@@ -20,8 +20,8 @@ window.onload = () => {
 	element.tabIndex = '1';
 	leftBox.className = "left-box";
 	rightBox.className = "right-box";
-	leftBox.innerHTML = "<p>Press start.</p><p>Type:</p>'F' = forward</p><p>'R' = rotate</p><div class='okay'>OK</div>";
-	rightBox.innerHTML = "<p>Click the</p><p>check button</p><p>to execute</p><p>your</p><p>logic.</p><div class='okay'>OK</div>";
+	leftBox.innerHTML = "<p>Press start.</p><p>Type:</p>'F' = forward</p><p>'R' = rotate</p><p>(left)</p><div class='okay'>OK</div>";
+	rightBox.innerHTML = "<p>Click the</p><p>check button</p><p>to run</p><p>your</p><p>commands.</p><div class='okay'>OK</div>";
 
 	playground.append(leftBox, element, rightBox);
 	document.body.insertBefore(playground, missionControlTitle);
