@@ -284,7 +284,6 @@ window.onload = () => {
 		movingArrow.pointing = "down";
 		movingArrow.spin = null;
 		ctx.drawImage(image, movingArrow.x, movingArrow.y, 100, 100);
-		// movements.length = 0;
 		draw();
 		pattern.innerText = "";
 	}
