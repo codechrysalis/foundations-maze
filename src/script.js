@@ -3,9 +3,8 @@ window.onload = () => {
 	const startButton = document.getElementsByClassName('start-button')[0];
 	const missionControlTitle = document.getElementsByClassName('missionControl-title')[0];
 	const missionControl = document.getElementsByClassName('missionControl')[0];
-	const moveForward = document.getElementsByClassName('moveForward')[0];
-	const rotate = document.getElementsByClassName('rotate')[0];
 	const executeCommands = document.getElementsByClassName('execute')[0];
+	const commands = document.getElementsByClassName("commands")[0];
 	const pattern = document.getElementsByClassName('pattern')[0];
 	const clear = document.getElementsByClassName('clear')[0];
 	const movements = [];
@@ -22,7 +21,7 @@ window.onload = () => {
 	element.tabIndex = '1';
 	leftBox.className = "left-box";
 	rightBox.className = "right-box";
-	leftBox.innerHTML = "<p>Press start.</p><p>Move the arrow<p/><p>clicking</p><p>forward</p><p>or</p><p>rotate.</p><div class='okay'>OK</div>";
+	leftBox.innerHTML = "<p>Press start.</p><p>Type:</p>'F' = forward</p><p>'R' = rotate</p><div class='okay'>OK</div>";
 	rightBox.innerHTML = "<p>Click the</p><p>check button</p><p>to execute</p><p>your</p><p>logic.</p><div class='okay'>OK</div>";
 
 	playground.append(leftBox, element, rightBox);
@@ -127,24 +126,28 @@ window.onload = () => {
 		ctx.drawImage(image, movingArrow.x, movingArrow.y, 100, 100);
 	}
 
-	const addMovement = direction => {
-		movements.push(direction);
-		pattern.append(movements.length + ". " + direction + " ");
+	const addMovement = () => {
+		const directions = commands.value.replace(/[^A-Z0-9]/ig, '').split('');
+		directions.map(direction => movements.push(direction.toLowerCase() === 'f' ? "forward" : "rotate"));
 	}
 
-	const executeAll = (moves) => {
+	const executeAll = () => {
+		resetStatus();
+		addMovement();
+		const message = movements.map((movement, index) => { return `${index}. ${movement} ` }).join('');
+		pattern.append(message);
 		const canvas = document.getElementById('canvas');
 		let i = 0;
 		let intervalId = setInterval(() => {
 			shakeIt(canvas, 'remove');
-			if (i > moves.length - 1) {
+			if (i > movements.length - 1) {
 				clearInterval(intervalId);
 				movements.length = 0;
 			} else {
 				ctx.clearRect(0, 0, element.width, element.height);
 				draw();
 				ctx.save();
-				directions(moves[i]);
+				directions(movements[i]);
 				ctx.restore();
 			}
 			i++;
@@ -152,7 +155,7 @@ window.onload = () => {
 	}
 
 	function addCanvasCoords(begin, end) {
-		console.log("I'm calculating");
+
 		if (begin[0] === end[0]) { //--> this means we are moving on Y axis
 			if (begin[1] > end[1]) {
 				for (let i = end[1]; i <= begin[1]; i++) {
@@ -281,7 +284,7 @@ window.onload = () => {
 		movingArrow.pointing = "down";
 		movingArrow.spin = null;
 		ctx.drawImage(image, movingArrow.x, movingArrow.y, 100, 100);
-		movements.length = 0;
+		// movements.length = 0;
 		draw();
 		pattern.innerText = "";
 	}
@@ -292,13 +295,17 @@ window.onload = () => {
 		missionControl.classList.remove('hide');
 	}
 
-	draw();
+	function evaluateLetter(e) {
+		const acceptedKeys = ["f", "F", "r", "R", ",", " "];
+		if (!acceptedKeys.includes(e.key)) {
+			e.preventDefault();
+		}
+	}
 
+	draw();
+	commands.addEventListener('keypress', (e) => { evaluateLetter(e) })
 	startButton.addEventListener('click', () => { playerReady() });
 	leftBox.addEventListener('click', () => { leftBox.style.visibility = "hidden" });
 	rightBox.addEventListener('click', () => { rightBox.style.visibility = "hidden" });
-	moveForward.addEventListener('click', () => { addMovement('forward') });
-	rotate.addEventListener('click', () => { addMovement('rotate') });
-	executeCommands.addEventListener('click', () => { executeAll(movements) });
-	clear.addEventListener('click', () => { resetStatus() })
+	executeCommands.addEventListener('click', () => { executeAll() });
 };

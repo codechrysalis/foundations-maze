@@ -57,6 +57,12 @@ button {
     font-size: 20px;
 }
 
+.execute {
+    display: block;
+    margin: 5px auto;
+    width: 500px;
+}
+
 .start-button {
     position: relative;
     top: 65px;
@@ -64,6 +70,13 @@ button {
 
 .hide {
     display: none;
+}
+
+.commands {
+    min-width: 500px;
+    min-height: 60px;
+    font-size: 24px;
+    margin: 0 auto;
 }
 
 .missionControl-title {
@@ -83,6 +96,7 @@ button {
 .pattern {
     display: block;
     font-size: 12px;
+    max-width: 1000px;
 }
 
 .shakeit {
