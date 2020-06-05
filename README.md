@@ -20,3 +20,6 @@ To help users understand computer logic.
 
 This project was realized by me, _Steppico_, and _zero4994_.
 If you want to contact us please do so by writing us at steppashr[at]gmail[dot]com.
+
+enjoy!
+[Here](/index.html)
