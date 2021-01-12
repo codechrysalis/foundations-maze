@@ -20,7 +20,7 @@ window.onload = () => {
 	element.tabIndex = '1';
 	leftBox.className = "left-box";
 	rightBox.className = "right-box";
-	leftBox.innerHTML = "<p>Press start.</p><p>Type:</p>'F' = forward</p><p>'R' = rotate</p><p>(left)</p><div class='okay'>OK</div>";
+	leftBox.innerHTML = "<p>Press start.</p><p>Type:</p>'F' = forward</p><p>'T' = turn</p><p>(left)</p><div class='okay'>OK</div>";
 	rightBox.innerHTML = "<p>Click the</p><p>check button</p><p>to run</p><p>your</p><p>commands.</p><div class='okay'>OK</div>";
 
 	playground.append(leftBox, element, rightBox);
@@ -95,7 +95,7 @@ window.onload = () => {
 				}
 			}
 
-		} else if (move === 'rotate') {
+		} else if (move === 'turn') {
 			switch (movingArrow.pointing) {
 				case "down": {
 					movingArrow.pointing = "left";
@@ -127,16 +127,14 @@ window.onload = () => {
 
 	const addMovement = () => {
 		const directions = commands.value.split('');
-		directions.map(direction => movements.push(direction.toLowerCase() === 'f' ? "forward" : "rotate"));
+		directions.map(direction => movements.push(direction.toLowerCase() === 'f' ? "forward" : "turn"));
 	}
 
 	const checkPosition = (index) => {
-		const cheat1 = "rrrfffffrffffffrfffffrrr";
-		const cheat2 = "rfffffrrrffffffrrrfffffr";
 		if (JSON.stringify(movingArrow.index) === JSON.stringify([550, 850]) && movingArrow.pointing === "down" && index === movements.length - 1) {
 			document.body.classList.add("winner");
 			executeCommands.setAttribute("disabled", "disabled");
-			pattern.innerText = commands.value !== cheat1 && commands.value !== cheat2 ? "Well done!" : "Well done... cheater :-)";
+			pattern.innerText = "Well done!";
 		}
 	}
 
@@ -326,7 +324,7 @@ window.onload = () => {
 	}
 
 	function evaluateLetter(e) {
-		const acceptedKeys = ["f", "F", "r", "R"];
+		const acceptedKeys = ["f", "F", "t", "T"];
 		if (!acceptedKeys.includes(e.key)) {
 			e.preventDefault();
 		}
