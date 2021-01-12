@@ -4,7 +4,7 @@ body {
     flex-direction: column;
     align-items: center;
     font-family: 'Press Start 2P', cursive;
-    background-color: lightgoldenrodyellow;
+    background-color: #fafafa;
 }
 
 .winner { 
@@ -54,11 +54,6 @@ h1 {
     animation: float-right 5.5s ease-in-out infinite;
 }
 
-#canvas {
-    background-color: #fafafa;
-    border: 3px solid black;
-}
-
 button {
     font-size: 20px;
 }
@@ -71,7 +66,8 @@ button {
 
 .start-button {
     position: relative;
-    top: 65px;
+    width: 200px;
+    /* top: px; */
 }
 
 .hide {
@@ -90,12 +86,12 @@ button {
     margin: 0px;
     position: relative;
     padding: 0px 0px 0px 4px;
-    top: 52px;
+    top: 12px;
 }
 
 .missionControl {
     border: 5px solid black;
-    margin: 40px 0px;
+    margin: 0px 0px;
     padding: 20px;
 }
 
