@@ -222,10 +222,10 @@ window.onload = () => {
 		//// horizontal lines
 		ctx.moveTo(300, 200);
 		ctx.lineTo(400, 200);
-		canvasCoords.done === false ? addCanvasCoords([200, 200], [300, 200]) : "";
+		canvasCoords.done === false ? addCanvasCoords([300, 200], [400, 200]) : "";
 		ctx.moveTo(700, 200);
 		ctx.lineTo(900, 200);
-		canvasCoords.done === false ? addCanvasCoords([600, 200], [800, 200]) : "";
+		canvasCoords.done === false ? addCanvasCoords([700, 200], [900, 200]) : "";
 		ctx.moveTo(300, 300);
 		ctx.lineTo(400, 300);
 		canvasCoords.done === false ? addCanvasCoords([300, 300], [400, 300]) : "";
