@@ -142,6 +142,8 @@ window.onload = () => {
 
 	const executeAll = () => {
 		resetStatus();
+		const button = document.getElementsByClassName('execute')[0];
+		button.setAttribute("disabled", "disabled");
 		addMovement();
 		const message = movements.map((movement, index) => { return `${index + 1}. ${movement} ` }).join('');
 		pattern.append(message);
@@ -152,6 +154,7 @@ window.onload = () => {
 			if (i > movements.length - 1) {
 				clearInterval(intervalId);
 				movements.length = 0;
+				button.removeAttribute("disabled");
 			} else {
 				ctx.clearRect(0, 0, element.width, element.height);
 				draw();
