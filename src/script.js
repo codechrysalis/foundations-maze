@@ -16,7 +16,7 @@ window.onload = () => {
 	playground.className = "playground";
 	element.id = "canvas"
 	element.width = 1100;
-	element.height = 700;
+	element.height = 900;
 	element.tabIndex = '1';
 	leftBox.className = "left-box";
 	rightBox.className = "right-box";
@@ -61,7 +61,7 @@ window.onload = () => {
 		if (move === "forward") {
 			switch (movingArrow.pointing) {
 				case "down": {
-					if (movingArrow.index[1] + 100 < 700 && !canvasCoords[`${movingArrow.x + 50} ${movingArrow.y + 100}`]) {
+					if (movingArrow.index[1] + 100 < element.height && !canvasCoords[`${movingArrow.x + 50} ${movingArrow.y + 100}`]) {
 						movingArrow.y += 100;
 
 					} else {
@@ -86,7 +86,7 @@ window.onload = () => {
 					break;
 				};
 				default: {
-					if (movingArrow.index[0] + 100 < 1100 && !canvasCoords[`${movingArrow.x + 100} ${movingArrow.y + 50}`]) {
+					if (movingArrow.index[0] + 100 < element.width && !canvasCoords[`${movingArrow.x + 100} ${movingArrow.y + 50}`]) {
 						movingArrow.x += 100;
 					} else {
 						shakeIt(canvas, "add");
@@ -133,8 +133,8 @@ window.onload = () => {
 	const checkPosition = (index) => {
 		const cheat1 = "rrrfffffrffffffrfffffrrr";
 		const cheat2 = "rfffffrrrffffffrrrfffffr";
-		if (JSON.stringify(movingArrow.index) === JSON.stringify([550, 650]) && movingArrow.pointing === "down" && index === movements.length - 1) {
-			canvas.classList.add("winner");
+		if (JSON.stringify(movingArrow.index) === JSON.stringify([550, 850]) && movingArrow.pointing === "down" && index === movements.length - 1) {
+			document.body.classList.add("winner");
 			executeCommands.setAttribute("disabled", "disabled");
 			pattern.innerText = commands.value !== cheat1 && commands.value !== cheat2 ? "Well done!" : "Well done... cheater :-)";
 		}
@@ -143,7 +143,7 @@ window.onload = () => {
 	const executeAll = () => {
 		resetStatus();
 		addMovement();
-		const message = movements.map((movement, index) => { return `${index}. ${movement} ` }).join('');
+		const message = movements.map((movement, index) => { return `${index + 1}. ${movement} ` }).join('');
 		pattern.append(message);
 		const canvas = document.getElementById('canvas');
 		let i = 0;
@@ -195,100 +195,116 @@ window.onload = () => {
 		ctx.beginPath();
 
 		// top (entrance from 500 to 600)
-		ctx.moveTo(100, 100);
+		ctx.moveTo(200, 100);
 		ctx.lineTo(500, 100);
-		canvasCoords.done === false ? addCanvasCoords([100, 100], [500, 100]) : "";
+		canvasCoords.done === false ? addCanvasCoords([200, 100], [500, 100]) : "";
 		ctx.moveTo(600, 100);
-		ctx.lineTo(1000, 100);
-		canvasCoords.done === false ? addCanvasCoords([600, 100], [1000, 100]) : "";
+		ctx.lineTo(900, 100);
+		canvasCoords.done === false ? addCanvasCoords([600, 100], [900, 100]) : "";
 
 		// left side
-		ctx.moveTo(100, 97.5);
-		ctx.lineTo(100, element.height - 100);
-		canvasCoords.done === false ? addCanvasCoords([100, 100], [100, element.height - 100]) : "";
+		ctx.moveTo(200, 97.5);
+		ctx.lineTo(200, element.height - 100);
+		canvasCoords.done === false ? addCanvasCoords([200, 100], [200, element.height - 100]) : "";
 
 
 		// bottom (exit from 500 to 600)
 		ctx.lineTo(500, element.height - 100);
 		canvasCoords.done === false ? addCanvasCoords([100, element.height - 100], [500, element.height - 100]) : "";
 		ctx.moveTo(600, element.height - 100);
-		ctx.lineTo(1000, element.height - 100);
-		canvasCoords.done === false ? addCanvasCoords([600, element.height - 100], [1000, element.height - 100]) : "";
+		ctx.lineTo(900, element.height - 100);
+		canvasCoords.done === false ? addCanvasCoords([600, element.height - 100], [900, element.height - 100]) : "";
 		// right side
-		ctx.lineTo(1000, 97.5);
-		canvasCoords.done === false ? addCanvasCoords([1000, element.height - 100], [1000, 100]) : "";
+		ctx.lineTo(900, 97.5);
+		canvasCoords.done === false ? addCanvasCoords([900, element.height - 100], [900, 100]) : "";
 
 		// inside pattern
 		//// horizontal lines
-		ctx.moveTo(100, 200);
-		ctx.lineTo(200, 200);
-		canvasCoords.done === false ? addCanvasCoords([100, 200], [200, 200]) : "";
 		ctx.moveTo(300, 200);
-		ctx.lineTo(700, 200);
-		canvasCoords.done === false ? addCanvasCoords([300, 200], [700, 200]) : "";
-		ctx.moveTo(800, 200);
+		ctx.lineTo(400, 200);
+		canvasCoords.done === false ? addCanvasCoords([200, 200], [300, 200]) : "";
+		ctx.moveTo(700, 200);
 		ctx.lineTo(900, 200);
-		canvasCoords.done === false ? addCanvasCoords([800, 200], [900, 200]) : "";
-		ctx.moveTo(400, 300);
-		ctx.lineTo(500, 300);
-		canvasCoords.done === false ? addCanvasCoords([400, 300], [500, 300]) : "";
-		ctx.moveTo(700, 300);
+		canvasCoords.done === false ? addCanvasCoords([600, 200], [800, 200]) : "";
+		ctx.moveTo(300, 300);
+		ctx.lineTo(400, 300);
+		canvasCoords.done === false ? addCanvasCoords([300, 300], [400, 300]) : "";
+		ctx.moveTo(500, 300);
 		ctx.lineTo(800, 300);
-		canvasCoords.done === false ? addCanvasCoords([700, 300], [800, 300]) : "";
-		ctx.moveTo(900, 300);
-		ctx.lineTo(1000, 300);
-		canvasCoords.done === false ? addCanvasCoords([900, 300], [1000, 300]) : "";
+		canvasCoords.done === false ? addCanvasCoords([500, 300], [800, 300]) : "";
 		ctx.moveTo(200, 400);
-		ctx.lineTo(400, 400);
-		canvasCoords.done === false ? addCanvasCoords([200, 400], [400, 400]) : "";
-		ctx.moveTo(500, 400);
-		ctx.lineTo(700, 400);
-		canvasCoords.done === false ? addCanvasCoords([500, 400], [700, 400]) : "";
-		ctx.moveTo(900, 400);
-		ctx.lineTo(1000, 400);
-		canvasCoords.done === false ? addCanvasCoords([900, 400], [1000, 400]) : "";
-		ctx.moveTo(100, 500);
-		ctx.lineTo(300, 500);
-		canvasCoords.done === false ? addCanvasCoords([100, 500], [300, 500]) : "";
+		ctx.lineTo(500, 400);
+		canvasCoords.done === false ? addCanvasCoords([200, 400], [500, 400]) : "";
+		ctx.moveTo(600, 400);
+		ctx.lineTo(900, 400);
+		canvasCoords.done === false ? addCanvasCoords([600, 400], [900, 400]) : "";
+		ctx.moveTo(300, 500);
+		ctx.lineTo(400, 500);
+		canvasCoords.done === false ? addCanvasCoords([300, 500], [400, 500]) : "";
 		ctx.moveTo(500, 500);
 		ctx.lineTo(600, 500);
 		canvasCoords.done === false ? addCanvasCoords([500, 500], [600, 500]) : "";
-		ctx.moveTo(700, 500);
+		ctx.moveTo(800, 500);
 		ctx.lineTo(900, 500);
-		canvasCoords.done === false ? addCanvasCoords([700, 500], [900, 500]) : "";
+		canvasCoords.done === false ? addCanvasCoords([800, 500], [900, 500]) : "";
+		ctx.moveTo(300, 600);
+		ctx.lineTo(400, 600);
+		canvasCoords.done === false ? addCanvasCoords([300, 600], [400, 600]) : "";
+		ctx.moveTo(500, 600);
+		ctx.lineTo(700, 600);
+		canvasCoords.done === false ? addCanvasCoords([500, 600], [700, 600]) : "";
+		ctx.moveTo(400, 700);
+		ctx.lineTo(600, 700);
+		canvasCoords.done === false ? addCanvasCoords([400, 700], [600, 700]) : "";
+		ctx.moveTo(700, 700);
+		ctx.lineTo(800, 700);
+		canvasCoords.done === false ? addCanvasCoords([700, 700], [800, 700]) : "";
 
 		//// vertical lines
-		ctx.moveTo(200, 300);
-		ctx.lineTo(200, 402.5);
-		canvasCoords.done === false ? addCanvasCoords([200, 300], [200, 400]) : "";
-		ctx.moveTo(300, 197.5);
-		ctx.lineTo(300, 300);
-		canvasCoords.done === false ? addCanvasCoords([300, 200], [300, 300]) : "";
-		ctx.moveTo(400, 297.5);
-		ctx.lineTo(400, 600);
-		canvasCoords.done === false ? addCanvasCoords([400, 300], [400, 600]) : "";
+		ctx.moveTo(300, 297.5);
+		ctx.lineTo(300, 502.5);
+		canvasCoords.done === false ? addCanvasCoords([300, 300], [300, 500]) : "";
+		ctx.moveTo(300, 597.5);
+		ctx.lineTo(300, 700);
+		canvasCoords.done === false ? addCanvasCoords([300, 600], [300, 700]) : "";
+		ctx.moveTo(400, 197.5);
+		ctx.lineTo(400, 302.5);
+		canvasCoords.done === false ? addCanvasCoords([400, 200], [400, 300]) : "";
+		ctx.moveTo(400, 497.5);
+		ctx.lineTo(400, 602.5);
+		canvasCoords.done === false ? addCanvasCoords([400, 500], [400, 600]) : "";
+		ctx.moveTo(500, 97.5);
+		ctx.lineTo(500, 200);
+		canvasCoords.done === false ? addCanvasCoords([500, 100], [500, 200]) : "";
 		ctx.moveTo(500, 397.5);
 		ctx.lineTo(500, 502.5);
 		canvasCoords.done === false ? addCanvasCoords([500, 400], [500, 500]) : "";
-		ctx.moveTo(600, 200);
-		ctx.lineTo(600, 400);
-		canvasCoords.done === false ? addCanvasCoords([600, 200], [600, 400]) : "";
-		ctx.moveTo(600, 497.5);
-		ctx.lineTo(600, 602.5);
-		canvasCoords.done === false ? addCanvasCoords([600, 500], [600, 600]) : "";
-		ctx.moveTo(700, 397.5);
-		ctx.lineTo(700, 502.5);
-		canvasCoords.done === false ? addCanvasCoords([700, 400], [700, 500]) : "";
-		ctx.moveTo(800, 100);
+		ctx.moveTo(500, 397.5);
+		ctx.lineTo(500, 502.5);
+		canvasCoords.done === false ? addCanvasCoords([500, 400], [500, 500]) : "";
+		ctx.moveTo(600, 97.5);
+		ctx.lineTo(600, 200);
+		canvasCoords.done === false ? addCanvasCoords([600, 100], [600, 200]) : "";
+		ctx.moveTo(600, 697.5);
+		ctx.lineTo(600, 802.5);
+		canvasCoords.done === false ? addCanvasCoords([600, 700], [600, 800]) : "";
+		ctx.moveTo(700, 400);
+		ctx.lineTo(700, 702.5);
+		canvasCoords.done === false ? addCanvasCoords([700, 400], [700, 700]) : "";
+		ctx.moveTo(800, 297.5);
 		ctx.lineTo(800, 400);
-		canvasCoords.done === false ? addCanvasCoords([800, 100], [800, 400]) : "";
+		canvasCoords.done === false ? addCanvasCoords([800, 300], [800, 400]) : "";
+		ctx.moveTo(800, 497.5);
+		ctx.lineTo(800, 600);
+		canvasCoords.done === false ? addCanvasCoords([800, 500], [800, 600]) : "";
+
 		// drawing
 		ctx.stroke();
 		canvasCoords.done === false ? canvasCoords.done = true : "";
 	}
 
 	function resetStatus() {
-		if (![...canvas.classList].includes("winner")) {
+		if (![...document.body.classList].includes("winner")) {
 			ctx.clearRect(0, 0, element.width, element.height);
 			movingArrow.x = element.width / 2 - 50;
 			movingArrow.y = 0;
