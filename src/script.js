@@ -131,7 +131,7 @@ window.onload = () => {
 	}
 
 	const checkPosition = (index) => {
-		if (JSON.stringify(movingArrow.index) === JSON.stringify([550, 850]) && movingArrow.pointing === "down" && index === movements.length - 1) {
+		if (JSON.stringify(movingArrow.index) === JSON.stringify([550, 850]) && index === movements.length - 1) {
 			document.body.classList.add("winner");
 			executeCommands.setAttribute("disabled", "disabled");
 			pattern.innerText = "Well done!";
