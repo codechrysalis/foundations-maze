@@ -131,7 +131,7 @@ window.onload = () => {
 	}
 
 	const checkPosition = (index) => {
-		if (JSON.stringify(movingArrow.index) === JSON.stringify([550, 850]) && movingArrow.pointing === "down" && index === movements.length - 1) {
+		if (JSON.stringify(movingArrow.index) === JSON.stringify([550, 850]) && index === movements.length - 1) {
 			document.body.classList.add("winner");
 			executeCommands.setAttribute("disabled", "disabled");
 			pattern.innerText = "Well done!";
@@ -211,7 +211,7 @@ window.onload = () => {
 
 		// bottom (exit from 500 to 600)
 		ctx.lineTo(500, element.height - 100);
-		canvasCoords.done === false ? addCanvasCoords([100, element.height - 100], [500, element.height - 100]) : "";
+		canvasCoords.done === false ? addCanvasCoords([200, element.height - 100], [500, element.height - 100]) : "";
 		ctx.moveTo(600, element.height - 100);
 		ctx.lineTo(900, element.height - 100);
 		canvasCoords.done === false ? addCanvasCoords([600, element.height - 100], [900, element.height - 100]) : "";
