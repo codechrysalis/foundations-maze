@@ -127,7 +127,10 @@ window.onload = () => {
 
 	const addMovement = () => {
 		const directions = commands.value.split('');
-		directions.map(direction => movements.push(direction.toLowerCase() === 'f' ? "forward" : "turn"));
+		directions.map(direction => {
+			if (direction.toLowerCase() === 'f') movements.push("forward");
+			if (direction.toLowerCase() === 't') movements.push("turn");
+		});
 	}
 
 	const checkPosition = (index) => {
